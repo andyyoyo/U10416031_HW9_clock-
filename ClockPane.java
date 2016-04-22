@@ -137,8 +137,14 @@ public class ClockPane extends Pane{
 		Line hLine = new Line(centerX,centerY,hourX,hourY);
 		hLine.setStroke(Color.GREEN);
 		
+		//add the label below the clock
+		Label l = new Label(h+":"+m+":"+s);
+		l.setPrefSize(100,25);
+		l.setLayoutX(100);
+		l.setLayoutY(250);
+		
 		
 		getChildren().clear();
-		getChildren().addAll(circle,t1,t2,t3,t4,sLine,mLine,hLine);
+		getChildren().addAll(circle,t1,t2,t3,t4,sLine,mLine,hLine,l);
 	}
 }
