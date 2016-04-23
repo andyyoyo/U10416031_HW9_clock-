@@ -106,6 +106,7 @@ public class ClockPane extends Pane{
 		int h = hour;
 		int m = minute;
 		int s = second;
+		Line[] line = new Line[60];
 		
 		//draw circle
 		Circle circle = new Circle(centerX,centerY,clockRadius);
@@ -115,6 +116,23 @@ public class ClockPane extends Pane{
 		Text t2 = new Text(centerX-clockRadius+3,centerY+5,"9");
 		Text t3 = new Text(centerX+clockRadius-10,centerY+3,"3");
 		Text t4 = new Text(centerX-3,centerY+clockRadius-3,"6");
+		
+		//add the marked scale on the clock 
+		for (int i =0;i<60;i++){
+			double intX = centerX+clockRadius*Math.sin(i*(2*Math.PI/60));
+			double intY = centerY-clockRadius*Math.cos(i*(2*Math.PI/60));
+			double endX ;
+			double endY ;
+			if(i==0||i==5||i==10||i==15||i==20||i==25||i==30||i==35||i==40||i==45||i==50||i==55){
+				endX = centerX+clockRadius*0.9*Math.sin(i*(2*Math.PI/60));
+				endY = centerY-clockRadius*0.9*Math.cos(i*(2*Math.PI/60));
+			}
+			else{
+				endX = centerX+clockRadius*0.95*Math.sin(i*(2*Math.PI/60));
+				endY = centerY-clockRadius*0.95*Math.cos(i*(2*Math.PI/60));
+			}
+			line[i] = new Line(intX,intY,endX,endY);
+		}
 		
 		//draw second hand
 		double sLength = clockRadius*0.8;
@@ -146,5 +164,8 @@ public class ClockPane extends Pane{
 		
 		getChildren().clear();
 		getChildren().addAll(circle,t1,t2,t3,t4,sLine,mLine,hLine,l);
+		for(int i=0;i<60;i++){	
+			getChildren().addAll(line[i]);
+		}	
 	}
 }
